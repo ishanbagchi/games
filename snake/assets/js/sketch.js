@@ -1,13 +1,45 @@
 var s;
+var cnv;
 var scl = 20;
+var d;
+var start;
+
+var gname;
 
 var food;
 
-function setup () {
-    createCanvas(600, 600);
+function resetGame() {
+	start = 1;
     s = new Snake();
-	frameRate(10);
-	pickLocation();
+	frameRate(6);
+	startLocation();
+}
+
+function centerCanvas() {
+	var x = (windowWidth - width) / 2;
+  	var y = (windowHeight - height) / 2;
+  	cnv.position(x);
+}
+
+function gameName() {
+	gname = createElement('h1', 'SNAKE');
+	gname.style('text-align', 'center');
+	gname.style('margin', '.2em');
+	gname.style('font-family', 'monospace');
+}
+
+function setup () {
+	gameName();
+    cnv = createCanvas(600, 600);
+	centerCanvas();
+	resetGame()
+}
+
+function startLocation() {
+	var cols = floor(width/scl);
+	var rows = floor(height/scl);
+	food = createVector(floor(cols / 2 + 4), floor(rows / 2));
+	food.mult(scl);
 }
 
 function pickLocation() {
@@ -31,13 +63,21 @@ function draw () {
 }
 
 function keyPressed() {
-    if(keyCode === UP_ARROW) {
+    if(keyCode === UP_ARROW && d != 2) {
         s.dir(0, -1);
-    } else if (keyCode === DOWN_ARROW) {
+		d = 1;
+		start = 0;
+    } else if (keyCode === DOWN_ARROW && d != 1) {
         s.dir(0, 1);
-    } else if (keyCode === RIGHT_ARROW) {
+		d = 2;
+		start = 0;
+    } else if (keyCode === RIGHT_ARROW && d != 4) {
         s.dir(1, 0);
-    } else if (keyCode === LEFT_ARROW) {
+		d = 3;
+		start = 0;
+    } else if (keyCode === LEFT_ARROW && d != 3) {
         s.dir(-1, 0);
+		d = 4;
+		start = 0;
     }
 }

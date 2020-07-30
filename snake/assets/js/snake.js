@@ -1,10 +1,17 @@
 function Snake () {
-    this.x = 0;
-    this.y = 0;
-    this.xspeed = 1;
+    this.x = scl * 9;
+    this.y = scl * 15;
+	// if(start == 1) {
+	// 	this.xspeed = 0;
+	// } else {
+	// 	this.xspeed = 1;
+	// }
+	this.xspeed = 1;
     this.yspeed = 0;
-	this.total = 0;
+	this.total = 1;
 	this.tail = [];
+	
+	d = 3;
 	
 	this.eat = function(pos) {
 		var d = dist(this.x, this.y, pos.x, pos.y);
@@ -26,8 +33,9 @@ function Snake () {
 			var pos = this.tail[i];
 			var d = dist(this.x, this.y, pos.x, pos.y);
 			if (d < 1) {
-				this.total = 0;
+				this.total = 1;
 				this.tail = [];
+				resetGame();
 			}
 		}
 	}
