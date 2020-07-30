@@ -11,7 +11,7 @@ var food;
 function resetGame() {
 	start = 1;
     s = new Snake();
-	frameRate(6);
+	frameRate(4);
 	startLocation();
 }
 
